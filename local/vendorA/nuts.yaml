@@ -1,0 +1,9 @@
+datadir: /opt/nuts
+network:
+  truststorefile: /opt/nuts/truststore.pem
+  certfile: /opt/nuts/certificate.pem
+  certkeyfile: /opt/nuts/certificate.pem
+  bootstrapnodes: vendorB-nuts:5555
+auth:
+  irma:
+    autoupdateschemas: false

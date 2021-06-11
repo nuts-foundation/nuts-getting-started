@@ -1,0 +1,13 @@
+nutsNodeAddr: "http://vendorA-nuts:1323"
+credentials:
+  username: "demo@nuts.nl"
+  password: "demo"
+customersfile: shared-data/customers.json
+dbfile: data/dbfile.db
+branding:
+  logo: branding/logo.png
+serviceprovider:
+  name: Vendor A
+  email: info@vendor-A.health
+  website: gopher://vendor-A.health
+  phone: 0031-do-not-call

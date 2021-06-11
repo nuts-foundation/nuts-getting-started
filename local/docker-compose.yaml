@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+  # Vendor A
+  vendorA-nuts:
+    image: &nuts_image nutsfoundation/nuts-node:master
+    environment:
+      NUTS_CONFIGFILE: /opt/nuts/nuts.yaml
+    volumes:
+      - "./vendorA/nuts.yaml:/opt/nuts/nuts.yaml"
+      - "./truststore.pem:/opt/nuts/truststore.pem"
+      - "./vendorA/certificate.pem:/opt/nuts/certificate.pem"
+      - "./vendorA/data/irma:/opt/nuts/irma:ro"
+  vendorA-admin:
+    image: &admin_image nutsfoundation/nuts-registry-admin-demo:master
+    volumes:
+      - "./vendorA/admin.yaml:/app/server.config.yaml:ro"
+      - "./vendorA/logo.png:/app/branding/logo.png:ro"
+      - "./vendorA/data/admin:/app/data:rw"
+      - "./vendorA/data/customers.json:/app/shared-data/customers.json:rw"
+    ports:
+      - 1303:1303
+  vendorA-ehr:
+    image: &ehr_image nutsfoundation/nuts-demo-ehr:main
+    volumes:
+      - "./vendorA/ehr.yaml:/app/server.config.yaml:ro"
+      - "./vendorA/logo.png:/app/branding/logo.png:ro"
+      - "./vendorA/data/ehr:/app/data:rw"
+      - "./vendorA/data/customers.json:/app/shared-data/customers.json:ro"
+    ports:
+      - 1304:1304
+
+
+  # Vendor B
+  vendorB-nuts:
+    image: *nuts_image
+    environment:
+      NUTS_CONFIGFILE: /opt/nuts/nuts.yaml
+    volumes:
+      - "./vendorB/nuts.yaml:/opt/nuts/nuts.yaml"
+      - "./truststore.pem:/opt/nuts/truststore.pem"
+      - "./vendorB/certificate.pem:/opt/nuts/certificate.pem"
+      - "./vendorB/data/irma:/opt/nuts/irma:ro"
+  vendorB-admin:
+    image: *admin_image
+    volumes:
+      - "./vendorB/admin.yaml:/app/server.config.yaml:ro"
+      - "./vendorB/logo.png:/app/branding/logo.png:ro"
+      - "./vendorB/data/admin:/app/data:rw"
+      - "./vendorB/data/customers.json:/app/shared-data/customers.json:rw"
+    ports:
+      - 1403:1303
+  vendorB-ehr:
+    image: *ehr_image
+    volumes:
+      - "./vendorB/ehr.yaml:/app/server.config.yaml:ro"
+      - "./vendorB/logo.png:/app/branding/logo.png:ro"
+      - "./vendorB/data/ehr:/app/data:rw"
+      - "./vendorB/data/customers.json:/app/shared-data/customers.json:ro"
+    ports:
+      - 1404:1304
