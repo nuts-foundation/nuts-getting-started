@@ -46,3 +46,18 @@ To start a node and connect to the remote development network, use to commands a
 ```shell script
 make -f development/Makefile
 ```
+
+# Features
+
+## Resetting
+
+When you've produced s
+
+## Demo EHR: IRMA authentication using `ngrok`
+You can log into Demo EHR using IRMA using the IRMA app when your registered care organization's `Domain` matches the domain of the IRMA e-mail attribute.
+For this flow to work the IRMA app needs to communicate with the IRMA services within the Nuts Node, which normally doesn't work when running locally.
+To allow external access to the Nuts Node (for development purposes) you can use `ngrok`.
+If you want to authenticate using IRMA, just make sure `ngrok` is running when you start the Docker containers.
+The `run.sh` (or Makefile) will configure the Nuts Node with the hostname served by `ngrok`.
+
+`ngrok` will need to proxy port 1323.
