@@ -60,4 +60,8 @@ To allow external access to the Nuts Node (for development purposes) you can use
 If you want to authenticate using IRMA, just make sure `ngrok` is running when you start the Docker containers.
 The `run.sh` (or Makefile) will configure the Nuts Node with the hostname served by `ngrok`.
 
-`ngrok` will need to proxy port 1323.
+`ngrok` will need to proxy port 1323:
+
+```shell script
+ngrok http 1323
+```
